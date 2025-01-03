@@ -40,7 +40,7 @@ struct NewItemView: View {
             }
         }
         .sheet(isPresented: $isTypePickerVisible) {
-            StorageItemTypePicker(type: $type)
+            ItemTypePicker(type: $type)
                 .presentationDetents([.medium])
         }
         .onChange(of: type) {
