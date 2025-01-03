@@ -8,21 +8,32 @@
 import SwiftUI
 
 struct ContentView: View {
-    
+
+    @State private var items: [StorageItem] = []
     @State private var isNewItemViewPresented = false
-    
+
     var body: some View {
-        Text("Hello!")
-            .onTapGesture {
-                isNewItemViewPresented = true
-            }
-            .sheet(isPresented: $isNewItemViewPresented) {
-                NewItemView { item in
-                    print(item)
+        NavigationStack {
+            ItemListView(items: $items)
+                .navigationTitle("Storage")
+                .toolbar {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button {
+                            isNewItemViewPresented = true
+                        } label: {
+                            Image(systemName: "plus")
+                        }
+                    }
                 }
-                .padding(20)
-                .presentationDetents([.medium])
+        }
+        .sheet(isPresented: $isNewItemViewPresented) {
+            NewItemView { item in
+                items.append(item)
+                isNewItemViewPresented = false
             }
+            .padding(20)
+            .presentationDetents([.medium])
+        }
     }
 }
 
