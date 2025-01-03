@@ -23,11 +23,7 @@ struct NewItemView: View {
             Button {
                 isTypePickerVisible = true
             } label: {
-                Label {
-                    Text(type.name)
-                } icon: {
-                    type.image
-                }
+                ItemTypeView(type: type, isSelected: false)
             }
             Spacer()
         }
@@ -41,6 +37,7 @@ struct NewItemView: View {
         }
         .sheet(isPresented: $isTypePickerVisible) {
             ItemTypePicker(type: $type)
+                .padding(.vertical, 10)
                 .presentationDetents([.medium])
         }
         .onChange(of: type) {

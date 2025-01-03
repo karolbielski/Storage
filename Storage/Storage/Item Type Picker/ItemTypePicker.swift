@@ -9,28 +9,19 @@ import SwiftUI
 
 struct ItemTypePicker: View {
     @Binding var type: StorageItemType
-    
+
     var body: some View {
-        ScrollView(.vertical, showsIndicators: false) {
-            VStack(alignment: .leading, spacing: 20) {
-                ForEach(StorageItemType.allCases) { type in
-                    Button {
-                        self.type = type
-                    } label: {
-                        Label {
-                            Text(type.name)
-                        } icon: {
-                            type.image
-                        }
-                    }
-                    .frame(maxWidth: .infinity)
-                    .foregroundStyle(
-                        type == self.type ? Color.purple : Color.black
-                    )
-                }
+        List(StorageItemType.allCases) { type in
+            Button {
+                self.type = type
+            } label: {
+                ItemTypeView(
+                    type: type,
+                    isSelected: self.type == type
+                )
             }
-            .padding(20)
         }
+        .listStyle(.plain)
     }
 }
 
