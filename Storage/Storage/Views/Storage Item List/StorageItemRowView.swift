@@ -21,11 +21,5 @@ struct StorageItemRowView: View {
 }
 
 #Preview {
-    StorageItemRowView(
-        item: StorageItem(
-            name: "Carrot",
-            quantity: 1,
-            group: .food
-        )
-    )
+    StorageItemRowView(item: .carrotPreview)
 }

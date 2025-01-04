@@ -12,7 +12,7 @@ struct StorageItemListView: View {
     @Binding var items: [StorageItem]
 
     var body: some View {
-        let groupedItems = Dictionary(grouping: items, by: { $0.group })
+        let groupedItems = items.grouped
         let groups = Array(groupedItems.keys).sorted { $0.name < $1.name }
 
         List(groups) { group in
@@ -32,11 +32,11 @@ struct StorageItemListView: View {
 #Preview {
     StorageItemListView(
         items: .constant([
-            StorageItem(name: "Carrot", quantity: 10, group: .food),
-            StorageItem(name: "Bread", quantity: 1, group: .food),
-            StorageItem(name: "Hammer", quantity: 1, group: .tools),
-            StorageItem(name: "Screwdriver", quantity: 2, group: .tools),
-            StorageItem(name: "Keyboard", quantity: 1, group: .electronics)
+            .carrotPreview,
+            .breadPreview,
+            .hammerPreview,
+            .screwdriverPreview,
+            .keyboardPreview
         ])
     )
 }
