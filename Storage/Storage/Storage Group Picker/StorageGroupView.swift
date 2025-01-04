@@ -1,5 +1,5 @@
 //
-//  ItemTypeView.swift
+//  StorageGroupView.swift
 //  Storage
 //
 //  Created by Karol Bielski on 03/01/2025.
@@ -7,15 +7,15 @@
 
 import SwiftUI
 
-struct ItemTypeView: View {
-    let type: StorageItemType
+struct StorageGroupView: View {
+    let group: StorageGroup
     let isSelected: Bool
 
     var body: some View {
         Label {
-            Text(type.name)
+            Text(group.name)
         } icon: {
-            type.image
+            group.image
         }
         .foregroundStyle(
             isSelected ? Color.purple : Color.black
@@ -24,15 +24,15 @@ struct ItemTypeView: View {
 }
 
 #Preview("Unselected") {
-    ItemTypeView(
-        type: .food,
+    StorageGroupView(
+        group: .food,
         isSelected: false
     )
 }
 
 #Preview("Selected") {
-    ItemTypeView(
-        type: .food,
+    StorageGroupView(
+        group: .food,
         isSelected: true
     )
 }

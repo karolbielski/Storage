@@ -1,5 +1,5 @@
 //
-//  StorageItemType.swift
+//  StorageGroup.swift
 //  Storage
 //
 //  Created by Karol Bielski on 02/01/2025.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum StorageItemType: Int, Identifiable, CaseIterable {
+enum StorageGroup: Int, Identifiable, CaseIterable {
     case food
     case clothing
     case electronics

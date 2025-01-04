@@ -1,5 +1,5 @@
 //
-//  StorageItemType+UI.swift
+//  StorageGroup+UI.swift
 //  Storage
 //
 //  Created by Karol Bielski on 02/01/2025.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-extension StorageItemType {
+extension StorageGroup {
     var name: String {
         switch self {
         case .food:

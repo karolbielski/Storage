@@ -11,5 +11,5 @@ struct StorageItem: Identifiable {
     let id = UUID()
     let name: String
     let quantity: Int
-    let type: StorageItemType
+    let group: StorageGroup
 }

@@ -1,5 +1,5 @@
 //
-//  NewItemView.swift
+//  NewStorageItemView.swift
 //  Storage
 //
 //  Created by Karol Bielski on 01/01/2025.
@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-struct NewItemView: View {
+struct NewStorageItemView: View {
     let onCreated: (StorageItem) -> Void
     @State private var name = ""
     @State private var quantity = 0
-    @State private var type: StorageItemType = .other
-    @State private var isTypePickerVisible = false
+    @State private var group: StorageGroup = .other
+    @State private var isGroupPickerVisible = false
 
     var body: some View {
         VStack {
@@ -21,9 +21,9 @@ struct NewItemView: View {
                 Text("\(quantity)")
             }
             Button {
-                isTypePickerVisible = true
+                isGroupPickerVisible = true
             } label: {
-                ItemTypeView(type: type, isSelected: false)
+                StorageGroupView(group: group, isSelected: false)
             }
             Spacer()
         }
@@ -35,13 +35,13 @@ struct NewItemView: View {
                 }
             }
         }
-        .sheet(isPresented: $isTypePickerVisible) {
-            ItemTypePicker(type: $type)
+        .sheet(isPresented: $isGroupPickerVisible) {
+            StorageGroupPicker(group: $group)
                 .padding(.vertical, 10)
                 .presentationDetents([.medium])
         }
-        .onChange(of: type) {
-            isTypePickerVisible = false
+        .onChange(of: group) {
+            isGroupPickerVisible = false
         }
     }
 
@@ -49,12 +49,12 @@ struct NewItemView: View {
         let item = StorageItem(
             name: name,
             quantity: quantity,
-            type: type
+            group: group
         )
         return item
     }
 }
 
 #Preview {
-    NewItemView { _ in }
+    NewStorageItemView { _ in }
 }

@@ -14,7 +14,7 @@ struct ContentView: View {
 
     var body: some View {
         NavigationStack {
-            ItemListView(items: $items)
+            StorageItemListView(items: $items)
                 .navigationTitle("Storage")
                 .toolbar {
                     ToolbarItem(placement: .topBarTrailing) {
@@ -27,7 +27,7 @@ struct ContentView: View {
                 }
         }
         .sheet(isPresented: $isNewItemViewPresented) {
-            NewItemView { item in
+            NewStorageItemView { item in
                 items.append(item)
                 isNewItemViewPresented = false
             }
