@@ -12,8 +12,19 @@ struct ItemListView: View {
     @Binding var items: [StorageItem]
 
     var body: some View {
-        List(items) { item in
-            ItemRowView(item: item)
+        let typedItems = Dictionary(grouping: items, by: { $0.type })
+        let types = Array(typedItems.keys).sorted { $0.name < $1.name }
+
+        List(types) { type in
+            if let items = typedItems[type] {
+                Section {
+                    ForEach(items) { item in
+                        ItemRowView(item: item)
+                    }
+                } header: {
+                    Text(type.name)
+                }
+            }
         }
     }
 }
@@ -21,8 +32,11 @@ struct ItemListView: View {
 #Preview {
     ItemListView(
         items: .constant([
-            StorageItem(name: "Carrot", quantity: 1, type: .food),
-            StorageItem(name: "Hammer", quantity: 10, type: .tools),
+            StorageItem(name: "Carrot", quantity: 10, type: .food),
+            StorageItem(name: "Bread", quantity: 1, type: .food),
+            StorageItem(name: "Hammer", quantity: 1, type: .tools),
+            StorageItem(name: "Screwdriver", quantity: 2, type: .tools),
+            StorageItem(name: "Keyboard", quantity: 1, type: .electronics)
         ])
     )
 }
