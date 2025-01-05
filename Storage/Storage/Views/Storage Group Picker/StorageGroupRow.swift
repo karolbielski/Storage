@@ -15,7 +15,7 @@ struct StorageGroupRow: View {
         Label {
             Text(group.name)
         } icon: {
-            group.image
+            Image(systemName: group.imageSystemName)
         }
         .foregroundStyle(
             isSelected ? Color.purple : Color.black

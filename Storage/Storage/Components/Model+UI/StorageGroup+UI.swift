@@ -5,8 +5,6 @@
 //  Created by Karol Bielski on 02/01/2025.
 //
 
-import SwiftUI
-
 extension StorageGroup {
     var name: String {
         switch self {
@@ -27,22 +25,22 @@ extension StorageGroup {
         }
     }
 
-    var image: Image {
+    var imageSystemName: String {
         switch self {
         case .food:
-            Image(systemName: "carrot")
+            "carrot"
         case .clothing:
-            Image(systemName: "hanger")
+            "hanger"
         case .electronics:
-            Image(systemName: "bolt")
+            "bolt"
         case .tools:
-            Image(systemName: "hammer")
+            "hammer"
         case .homeUtensils:
-            Image(systemName: "fork.knife")
+            "fork.knife"
         case .medicine:
-            Image(systemName: "syringe")
+            "syringe"
         case .other:
-            Image(systemName: "square")
+            "square"
         }
     }
 }
