@@ -10,6 +10,7 @@ import SwiftUI
 struct StorageItemList: View {
 
     @Binding var items: [StorageItem]
+    @Binding var selectedItem: StorageItem?
 
     var body: some View {
         let groupedItems = items.grouped
@@ -19,7 +20,12 @@ struct StorageItemList: View {
             if let items = groupedItems[group] {
                 Section {
                     ForEach(items) { item in
-                        StorageItemRow(item: item)
+                        Button {
+                            selectedItem = item
+                        } label: {
+                            StorageItemRow(item: item)
+                        }
+                        .buttonStyle(.plain)
                     }
                 } header: {
                     Text(group.name)
@@ -37,6 +43,7 @@ struct StorageItemList: View {
             .hammerPreview,
             .screwdriverPreview,
             .keyboardPreview
-        ])
+        ]),
+        selectedItem: .constant(nil)
     )
 }

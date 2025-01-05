@@ -7,9 +7,9 @@
 
 import Foundation
 
-struct StorageItem: Identifiable {
+struct StorageItem: Identifiable, Equatable {
     let id = UUID()
-    let name: String
-    let quantity: Int
-    let group: StorageGroup
+    var name: String
+    var quantity: Int
+    var group: StorageGroup
 }
