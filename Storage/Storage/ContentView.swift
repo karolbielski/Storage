@@ -14,7 +14,7 @@ struct ContentView: View {
 
     var body: some View {
         NavigationStack {
-            StorageItemListView(items: $items)
+            StorageItemList(items: $items)
                 .navigationTitle("Storage")
                 .toolbar {
                     ToolbarItem(placement: .topBarTrailing) {

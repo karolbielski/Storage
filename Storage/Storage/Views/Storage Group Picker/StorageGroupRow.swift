@@ -1,5 +1,5 @@
 //
-//  StorageGroupView.swift
+//  StorageGroupRow.swift
 //  Storage
 //
 //  Created by Karol Bielski on 03/01/2025.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct StorageGroupView: View {
+struct StorageGroupRow: View {
     let group: StorageGroup
     let isSelected: Bool
 
@@ -24,14 +24,14 @@ struct StorageGroupView: View {
 }
 
 #Preview("Unselected") {
-    StorageGroupView(
+    StorageGroupRow(
         group: .food,
         isSelected: false
     )
 }
 
 #Preview("Selected") {
-    StorageGroupView(
+    StorageGroupRow(
         group: .food,
         isSelected: true
     )

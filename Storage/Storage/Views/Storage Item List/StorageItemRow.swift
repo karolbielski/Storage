@@ -1,5 +1,5 @@
 //
-//  StorageItemRowView.swift
+//  StorageItemRow.swift
 //  Storage
 //
 //  Created by Karol Bielski on 03/01/2025.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct StorageItemRowView: View {
+struct StorageItemRow: View {
     
     let item: StorageItem
     
@@ -21,5 +21,5 @@ struct StorageItemRowView: View {
 }
 
 #Preview {
-    StorageItemRowView(item: .carrotPreview)
+    StorageItemRow(item: .carrotPreview)
 }

@@ -23,7 +23,7 @@ struct NewStorageItemView: View {
             Button {
                 isGroupPickerVisible = true
             } label: {
-                StorageGroupView(group: group, isSelected: false)
+                StorageGroupRow(group: group, isSelected: false)
             }
             Spacer()
         }

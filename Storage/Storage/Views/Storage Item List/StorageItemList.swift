@@ -1,5 +1,5 @@
 //
-//  StorageItemListView.swift
+//  StorageItemList.swift
 //  Storage
 //
 //  Created by Karol Bielski on 03/01/2025.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct StorageItemListView: View {
+struct StorageItemList: View {
 
     @Binding var items: [StorageItem]
 
@@ -19,7 +19,7 @@ struct StorageItemListView: View {
             if let items = groupedItems[group] {
                 Section {
                     ForEach(items) { item in
-                        StorageItemRowView(item: item)
+                        StorageItemRow(item: item)
                     }
                 } header: {
                     Text(group.name)
@@ -30,7 +30,7 @@ struct StorageItemListView: View {
 }
 
 #Preview {
-    StorageItemListView(
+    StorageItemList(
         items: .constant([
             .carrotPreview,
             .breadPreview,

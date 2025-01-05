@@ -15,7 +15,7 @@ struct StorageGroupPicker: View {
             Button {
                 self.group = group
             } label: {
-                StorageGroupView(
+                StorageGroupRow(
                     group: group,
                     isSelected: self.group == group
                 )
