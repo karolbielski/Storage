@@ -14,10 +14,17 @@ struct ContentView: View {
 
     var body: some View {
         NavigationStack {
-            StorageItemList(
-                items: $items,
-                selectedItem: $selectedItem
-            )
+            Group {
+                if items.isEmpty {
+                    Text("No items\nAdd new item by + button")
+                        .multilineTextAlignment(.center)
+                } else {
+                    StorageItemList(
+                        items: $items,
+                        selectedItem: $selectedItem
+                    )
+                }
+            }
             .navigationTitle("Storage")
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
