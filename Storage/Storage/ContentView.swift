@@ -42,11 +42,19 @@ struct ContentView: View {
                 .padding(20)
                 .toolbar {
                     ToolbarItem(placement: .bottomBar) {
-                        Button("Save") {
-                            if let index = items.firstIndex(of: item) {
-                                items[index] = viewModel.item
+                        VStack {
+                            Button("Remove") {
+                                if let index = items.firstIndex(of: item) {
+                                    items.remove(at: index)
+                                }
+                                selectedItem = nil
                             }
-                            selectedItem = nil
+                            Button("Save") {
+                                if let index = items.firstIndex(of: item) {
+                                    items[index] = viewModel.item
+                                }
+                                selectedItem = nil
+                            }
                         }
                     }
                 }
