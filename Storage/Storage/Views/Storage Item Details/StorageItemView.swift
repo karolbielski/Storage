@@ -15,7 +15,10 @@ struct StorageItemView: View {
         VStack {
             TextField("Name", text: $viewModel.name)
             Stepper(value: $viewModel.quantity, in: 0...1000, step: 1) {
-                Text("\(viewModel.quantity)")
+                Text("Quantity: \(viewModel.quantity)")
+            }
+            Stepper(value: $viewModel.minimalQuantity, in: 0...1000, step: 1) {
+                Text("Desired quantity: \(viewModel.minimalQuantity)")
             }
             Button {
                 isGroupPickerVisible = true

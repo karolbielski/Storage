@@ -10,12 +10,14 @@ import Foundation
 final class StorageItemViewModel: ObservableObject {
     @Published var name: String = ""
     @Published var quantity: Int = 0
+    @Published var minimalQuantity: Int = 0
     @Published var group: StorageGroup = .other
     
     var item: StorageItem {
         StorageItem(
             name: name,
             quantity: quantity,
+            minimalQuantity: minimalQuantity,
             group: group
         )
     }
@@ -23,6 +25,7 @@ final class StorageItemViewModel: ObservableObject {
     init(item: StorageItem) {
         name = item.name
         quantity = item.quantity
+        minimalQuantity = item.minimalQuantity
         group = item.group
     }
     
@@ -31,6 +34,7 @@ final class StorageItemViewModel: ObservableObject {
             item: StorageItem(
                 name: "",
                 quantity: 0,
+                minimalQuantity: 0,
                 group: .other
             )
         )
