@@ -9,14 +9,13 @@ import SwiftUI
 
 struct StorageItemView: View {
     @ObservedObject var viewModel: StorageItemViewModel
-    @State private var isGroupPickerVisible = false
 
     var body: some View {
         VStack(spacing: 20) {
             HStack {
                 TextField("Name", text: $viewModel.name)
                 Button {
-                    isGroupPickerVisible = true
+                    viewModel.isGroupPickerVisible = true
                 } label: {
                     Image(systemName: viewModel.group.imageSystemName)
                         .foregroundStyle(Color.black)
@@ -28,13 +27,13 @@ struct StorageItemView: View {
             )
             Spacer()
         }
-        .sheet(isPresented: $isGroupPickerVisible) {
+        .sheet(isPresented: $viewModel.isGroupPickerVisible) {
             StorageGroupPicker(group: $viewModel.group)
                 .padding(.vertical, 10)
                 .presentationDetents([.medium])
         }
         .onChange(of: viewModel.group) {
-            isGroupPickerVisible = false
+            viewModel.isGroupPickerVisible = false
         }
     }
 }

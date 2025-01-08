@@ -12,6 +12,7 @@ final class StorageItemViewModel: ObservableObject {
     @Published var quantity: Int = 0
     @Published var minimalQuantity: Int = 0
     @Published var group: StorageGroup = .other
+    @Published var isGroupPickerVisible: Bool = false
     
     var item: StorageItem {
         StorageItem(
