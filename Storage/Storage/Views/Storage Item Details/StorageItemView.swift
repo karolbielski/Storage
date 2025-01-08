@@ -12,19 +12,20 @@ struct StorageItemView: View {
     @State private var isGroupPickerVisible = false
 
     var body: some View {
-        VStack {
-            TextField("Name", text: $viewModel.name)
-            Stepper(value: $viewModel.quantity, in: 0...1000, step: 1) {
-                Text("Quantity: \(viewModel.quantity)")
+        VStack(spacing: 20) {
+            HStack {
+                TextField("Name", text: $viewModel.name)
+                Button {
+                    isGroupPickerVisible = true
+                } label: {
+                    Image(systemName: viewModel.group.imageSystemName)
+                        .foregroundStyle(Color.black)
+                }
             }
-            Stepper(value: $viewModel.minimalQuantity, in: 0...1000, step: 1) {
-                Text("Desired quantity: \(viewModel.minimalQuantity)")
-            }
-            Button {
-                isGroupPickerVisible = true
-            } label: {
-                StorageGroupRow(group: viewModel.group, isSelected: false)
-            }
+            QuantityView(
+                quantity: $viewModel.quantity,
+                desiredQuantity: $viewModel.minimalQuantity
+            )
             Spacer()
         }
         .sheet(isPresented: $isGroupPickerVisible) {
