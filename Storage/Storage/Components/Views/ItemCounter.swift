@@ -12,9 +12,7 @@ struct ItemCounter: View {
     
     var body: some View {
         HStack(spacing: 20) {
-            if quantity > 0 {
-                QuantityDecreaseButton(quantity: $quantity)
-            }
+            QuantityDecreaseButton(quantity: $quantity)
             Text("\(quantity)")
             QuantityIncreaseButton(quantity: $quantity)
         }
