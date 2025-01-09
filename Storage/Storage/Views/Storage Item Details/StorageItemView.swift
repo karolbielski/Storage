@@ -21,19 +21,25 @@ struct StorageItemView: View {
                         .foregroundStyle(Color.black)
                 }
             }
-            QuantityView(
-                quantity: $viewModel.quantity,
-                minimalQuantity: $viewModel.minimalQuantity
-            )
+            ItemCounter(quantity: $viewModel.quantity)
+            if viewModel.hasMinimalAmount {
+                QuantityView(
+                    quantity: viewModel.quantity,
+                    minimalQuantity: $viewModel.minimalQuantity
+                )
+            } else {
+                Button {
+                    viewModel.hasMinimalAmount = true
+                } label: {
+                    Text("Set minimal amount")
+                }
+            }
             Spacer()
         }
         .sheet(isPresented: $viewModel.isGroupPickerVisible) {
             StorageGroupPicker(group: $viewModel.group)
                 .padding(.vertical, 10)
                 .presentationDetents([.medium])
-        }
-        .onChange(of: viewModel.group) {
-            viewModel.isGroupPickerVisible = false
         }
     }
 }

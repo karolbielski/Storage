@@ -8,12 +8,28 @@
 import Foundation
 
 final class StorageItemViewModel: ObservableObject {
-    @Published var name: String = ""
-    @Published var quantity: Int = 0
-    @Published var minimalQuantity: Int = 0
-    @Published var group: StorageGroup = .other
-    @Published var isGroupPickerVisible: Bool = false
+    @Published var name: String
+    @Published var quantity: Int
     
+    @Published var minimalQuantity: Int {
+        didSet {
+            if minimalQuantity == 0 {
+                hasMinimalAmount = false
+                minimalQuantity = StorageItem.defaultMinimalQuantity
+            }
+        }
+    }
+    
+    @Published var group: StorageGroup {
+        didSet {
+            isGroupPickerVisible = false
+        }
+    }
+    
+    @Published var hasMinimalAmount: Bool
+    
+    @Published var isGroupPickerVisible: Bool = false
+
     var item: StorageItem {
         StorageItem(
             name: name,
@@ -28,14 +44,15 @@ final class StorageItemViewModel: ObservableObject {
         quantity = item.quantity
         minimalQuantity = item.minimalQuantity
         group = item.group
+        hasMinimalAmount = item.minimalQuantity > StorageItem.defaultMinimalQuantity
     }
     
     convenience init() {
         self.init(
             item: StorageItem(
                 name: "",
-                quantity: 0,
-                minimalQuantity: 0,
+                quantity: StorageItem.defaultQuantity,
+                minimalQuantity: StorageItem.defaultMinimalQuantity,
                 group: .other
             )
         )

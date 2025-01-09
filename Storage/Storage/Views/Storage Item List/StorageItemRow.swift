@@ -15,7 +15,11 @@ struct StorageItemRow: View {
         HStack {
             Text(item.name)
             Spacer()
-            Text("\(item.quantity) / \(item.minimalQuantity)")
+            if item.minimalQuantity > StorageItem.defaultMinimalQuantity {
+                Text("\(item.quantity) / \(item.minimalQuantity)")
+            } else {
+                Text("\(item.quantity)")
+            }
         }
     }
 }

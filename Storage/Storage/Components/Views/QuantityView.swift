@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct QuantityView: View {
-    @Binding var quantity: Int
+    let quantity: Int
     @Binding var minimalQuantity: Int
     @State private var fraction: CGFloat = 0
 
@@ -23,31 +23,33 @@ struct QuantityView: View {
                 }
                 QuantityIncreaseButton(quantity: $minimalQuantity)
             }
-            HStack {
-                QuantityDecreaseButton(quantity: $quantity)
-                QuantityIncreaseButton(quantity: $quantity)
+        }
+        .onAppear(perform: updateFraction)
+        .onChange(of: quantity) {
+            withAnimation {
+                updateFraction()
             }
         }
-        .onChange(of: quantity, updateFraction)
-        .onChange(of: minimalQuantity, updateFraction)
-    }
-    
-    private func updateFraction() {
-        withAnimation {
-            if quantity <= 0 || minimalQuantity <= 0 {
-                fraction = 0
-            } else {
-                fraction = CGFloat(quantity) / CGFloat(minimalQuantity)
+        .onChange(of: minimalQuantity) {
+            withAnimation {
+                updateFraction()
             }
+        }
+    }
+
+    private func updateFraction() {
+        if quantity <= 0 || minimalQuantity <= 0 {
+            fraction = 0
+        } else {
+            fraction = CGFloat(quantity) / CGFloat(minimalQuantity)
         }
     }
 }
 
 #Preview {
-    @Previewable @State var quantity: Int = 0
-    @Previewable @State var minimalQuantity: Int = 0
+    @Previewable @State var minimalQuantity: Int = 1
     QuantityView(
-        quantity: $quantity,
+        quantity: 1,
         minimalQuantity: $minimalQuantity
     )
 }

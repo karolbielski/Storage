@@ -13,4 +13,7 @@ struct StorageItem: Identifiable, Equatable {
     let quantity: Int
     let minimalQuantity: Int
     let group: StorageGroup
+    
+    static let defaultQuantity = 1
+    static let defaultMinimalQuantity = 1
 }
