@@ -9,38 +9,35 @@ import SwiftUI
 
 struct QuantityView: View {
     @Binding var quantity: Int
-    @Binding var desiredQuantity: Int
+    @Binding var minimalQuantity: Int
     @State private var fraction: CGFloat = 0
-    
+
     var body: some View {
         VStack {
             HStack {
-                QuantityDecreaseButton(quantity: $quantity)
+                QuantityDecreaseButton(quantity: $minimalQuantity)
                 ZStack(alignment: .leading) {
                     QuantityBar(fraction: fraction)
-                    Text("\(quantity)")
+                    Text("\(quantity) / \(minimalQuantity)")
                         .padding(.horizontal, 10)
                 }
+                QuantityIncreaseButton(quantity: $minimalQuantity)
+            }
+            HStack {
+                QuantityDecreaseButton(quantity: $quantity)
                 QuantityIncreaseButton(quantity: $quantity)
             }
-            ItemCounter(quantity: $desiredQuantity)
         }
-        .onChange(of: quantity) { oldValue, newValue in
-            guard newValue > 0 else {
+        .onChange(of: quantity, updateFraction)
+        .onChange(of: minimalQuantity, updateFraction)
+    }
+    
+    private func updateFraction() {
+        withAnimation {
+            if quantity <= 0 || minimalQuantity <= 0 {
                 fraction = 0
-                return
-            }
-            withAnimation {
-                fraction = CGFloat(newValue) / CGFloat(desiredQuantity)
-            }
-        }
-        .onChange(of: desiredQuantity) { oldValue, newValue in
-            guard newValue > 0 else {
-                fraction = 0
-                return
-            }
-            withAnimation {
-                fraction = CGFloat(quantity) / CGFloat(newValue)
+            } else {
+                fraction = CGFloat(quantity) / CGFloat(minimalQuantity)
             }
         }
     }
@@ -48,9 +45,9 @@ struct QuantityView: View {
 
 #Preview {
     @Previewable @State var quantity: Int = 0
-    @Previewable @State var desiredQuantity: Int = 0
+    @Previewable @State var minimalQuantity: Int = 0
     QuantityView(
         quantity: $quantity,
-        desiredQuantity: $desiredQuantity
+        minimalQuantity: $minimalQuantity
     )
 }

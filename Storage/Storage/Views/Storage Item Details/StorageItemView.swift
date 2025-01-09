@@ -23,7 +23,7 @@ struct StorageItemView: View {
             }
             QuantityView(
                 quantity: $viewModel.quantity,
-                desiredQuantity: $viewModel.minimalQuantity
+                minimalQuantity: $viewModel.minimalQuantity
             )
             Spacer()
         }

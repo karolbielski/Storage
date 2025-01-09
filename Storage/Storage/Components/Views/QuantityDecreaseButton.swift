@@ -9,10 +9,13 @@ import SwiftUI
 
 struct QuantityDecreaseButton: View {
     @Binding var quantity: Int
+    var minimalValue = 0
     
     var body: some View {
         Button {
-            quantity -= 1
+            if quantity > minimalValue {
+                quantity -= 1
+            }
         } label: {
             Image(systemName: "minus")
         }
