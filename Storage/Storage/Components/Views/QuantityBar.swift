@@ -14,9 +14,9 @@ struct QuantityBar: View {
         GeometryReader { geometry in
             ZStack(alignment: .leading) {
                 Rectangle()
-                    .fill(Color.gray)
+                    .fill(Color.secondary.opacity(0.5))
                 Rectangle()
-                    .fill(Color.yellow)
+                    .fill(Color.purple)
                     .frame(width: geometry.size.width * fraction.normalized)
             }
         }

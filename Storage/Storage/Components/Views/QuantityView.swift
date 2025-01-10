@@ -13,16 +13,15 @@ struct QuantityView: View {
     @State private var fraction: CGFloat = 0
 
     var body: some View {
-        VStack {
-            HStack {
-                QuantityDecreaseButton(quantity: $minimalQuantity)
-                ZStack(alignment: .leading) {
-                    QuantityBar(fraction: fraction)
-                    Text("\(quantity) / \(minimalQuantity)")
-                        .padding(.horizontal, 10)
-                }
-                QuantityIncreaseButton(quantity: $minimalQuantity)
+        HStack {
+            QuantityDecreaseButton(quantity: $minimalQuantity)
+            ZStack(alignment: .leading) {
+                QuantityBar(fraction: fraction)
+                Text("\(quantity) / \(minimalQuantity)")
+                    .foregroundStyle(Color.white)
+                    .padding(.horizontal, 10)
             }
+            QuantityIncreaseButton(quantity: $minimalQuantity)
         }
         .onAppear(perform: updateFraction)
         .onChange(of: quantity) {

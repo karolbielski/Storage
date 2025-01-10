@@ -12,13 +12,11 @@ struct QuantityButtonStyle: ButtonStyle {
         configuration.label
             .frame(width: 20, height: 20)
             .padding(10)
-            .foregroundStyle(Color.black)
-            .background(
+            .fontWeight(.bold)
+            .foregroundStyle(
                 configuration.isPressed
-                    ? Circle()
-                        .fill(Color.yellow.opacity(0.3))
-                    : Circle()
-                        .fill(Color.yellow)
+                ? Color.purple.opacity(0.3)
+                : Color.purple
             )
             .animation(
                 configuration.isPressed
