@@ -26,6 +26,7 @@ struct ContentView: View {
                 }
             }
             .navigationTitle("Storage")
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
