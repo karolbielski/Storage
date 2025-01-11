@@ -12,34 +12,36 @@ struct StorageItemView: View {
 
     var body: some View {
         VStack(spacing: 20) {
-            HStack {
-                TextField("Name", text: $viewModel.name)
-                Button {
-                    viewModel.isGroupPickerVisible = true
-                } label: {
-                    Image(systemName: viewModel.group.imageSystemName)
-                        .foregroundStyle(Color.black)
-                }
-            }
-            ItemCounter(quantity: $viewModel.quantity)
-            if viewModel.hasMinimalAmount {
-                QuantityView(
-                    quantity: viewModel.quantity,
-                    minimalQuantity: $viewModel.minimalQuantity
-                )
-            } else {
-                Button {
-                    viewModel.hasMinimalAmount = true
-                } label: {
-                    Text("Set minimal amount")
-                }
-            }
+            propertiesView
+            itemCounterView
+            minimalAmountView
             Spacer()
         }
-        .sheet(isPresented: $viewModel.isGroupPickerVisible) {
-            StorageGroupPicker(group: $viewModel.group)
-                .padding(.vertical, 10)
-                .presentationDetents([.medium])
+    }
+    
+    @ViewBuilder private var propertiesView: some View {
+        HStack {
+            TextField("Name", text: $viewModel.name)
+            StorageGroupButton(group: $viewModel.group)
+        }
+    }
+    
+    @ViewBuilder private var itemCounterView: some View {
+        ItemCounter(quantity: $viewModel.quantity)
+    }
+    
+    @ViewBuilder private var minimalAmountView: some View {
+        if viewModel.hasMinimalAmount {
+            QuantityView(
+                quantity: viewModel.quantity,
+                minimalQuantity: $viewModel.minimalQuantity
+            )
+        } else {
+            Button {
+                viewModel.hasMinimalAmount = true
+            } label: {
+                Text("Set minimal amount")
+            }
         }
     }
 }

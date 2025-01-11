@@ -10,7 +10,9 @@ import Foundation
 final class StorageItemViewModel: ObservableObject {
     @Published var name: String
     @Published var quantity: Int
-    
+    @Published var group: StorageGroup
+    @Published var hasMinimalAmount: Bool
+
     @Published var minimalQuantity: Int {
         didSet {
             if minimalQuantity == 0 {
@@ -19,16 +21,6 @@ final class StorageItemViewModel: ObservableObject {
             }
         }
     }
-    
-    @Published var group: StorageGroup {
-        didSet {
-            isGroupPickerVisible = false
-        }
-    }
-    
-    @Published var hasMinimalAmount: Bool
-    
-    @Published var isGroupPickerVisible: Bool = false
 
     var item: StorageItem {
         StorageItem(
