@@ -39,41 +39,40 @@ struct ContentView: View {
         }
         .sheet(item: $selectedItem) { item in
             let viewModel = StorageItemViewModel(item: item)
-            StorageItemView(viewModel: viewModel)
-                .padding(20)
-                .toolbar {
-                    ToolbarItem(placement: .bottomBar) {
-                        VStack {
-                            Button("Remove") {
-                                if let index = items.firstIndex(of: item) {
-                                    items.remove(at: index)
-                                }
-                                selectedItem = nil
-                            }
-                            Button("Save") {
-                                if let index = items.firstIndex(of: item) {
-                                    items[index] = viewModel.item
-                                }
-                                selectedItem = nil
-                            }
+            VStack(spacing: 20) {
+                StorageItemView(viewModel: viewModel)
+                HStack(spacing: 20) {
+                    Button("Remove") {
+                        if let index = items.firstIndex(of: item) {
+                            items.remove(at: index)
                         }
+                        selectedItem = nil
                     }
+                    .buttonStyle(DestructiveButtonStyle())
+                    Button("Save") {
+                        if let index = items.firstIndex(of: item) {
+                            items[index] = viewModel.item
+                        }
+                        selectedItem = nil
+                    }
+                    .buttonStyle(ConfirmButtonStyle())
                 }
-                .presentationDetents([.medium])
+            }
+            .padding(20)
+            .presentationDetents([.fraction(0.4)])
         }
         .sheet(isPresented: $isNewItemViewPresented) {
             let viewModel = StorageItemViewModel()
-            StorageItemView(viewModel: viewModel)
-                .padding(20)
-                .toolbar {
-                    ToolbarItem(placement: .bottomBar) {
-                        Button("Create") {
-                            items.append(viewModel.item)
-                            isNewItemViewPresented = false
-                        }
-                    }
+            VStack(spacing: 20) {
+                StorageItemView(viewModel: viewModel)
+                Button("Create") {
+                    items.append(viewModel.item)
+                    isNewItemViewPresented = false
                 }
-                .presentationDetents([.medium])
+                .buttonStyle(ConfirmButtonStyle())
+            }
+            .padding(20)
+            .presentationDetents([.fraction(0.4)])
         }
     }
 }

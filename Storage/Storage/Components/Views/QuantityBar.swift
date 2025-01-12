@@ -16,7 +16,7 @@ struct QuantityBar: View {
                 Rectangle()
                     .fill(Color.secondary.opacity(0.5))
                 Rectangle()
-                    .fill(Color.purple)
+                    .fill(Color.purple.opacity(0.5))
                     .frame(width: geometry.size.width * fraction.normalized)
             }
         }
