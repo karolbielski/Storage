@@ -11,17 +11,26 @@ struct QuantityView: View {
     let quantity: Int
     @Binding var minimalQuantity: Int
     @State private var fraction: CGFloat = 0
+    @State private var isMinimalQuantityChangeViewVisible = false
 
     var body: some View {
         HStack {
-            QuantityDecreaseButton(quantity: $minimalQuantity)
-            ZStack(alignment: .leading) {
+            ZStack(alignment: .center) {
                 QuantityBar(fraction: fraction)
-                Text("\(quantity) / \(minimalQuantity)")
+                Text("\(minimalQuantity)")
+                    .font(.title3)
                     .foregroundStyle(Color.white)
                     .padding(.horizontal, 10)
             }
-            QuantityIncreaseButton(quantity: $minimalQuantity)
+            .onTapGesture {
+                withAnimation {
+                    isMinimalQuantityChangeViewVisible.toggle()
+                }
+            }
+            if isMinimalQuantityChangeViewVisible {
+                QuantityDecreaseButton(quantity: $minimalQuantity, lowestQuantity: 0)
+                QuantityIncreaseButton(quantity: $minimalQuantity)
+            }
         }
         .onAppear(perform: updateFraction)
         .onChange(of: quantity) {
@@ -46,9 +55,6 @@ struct QuantityView: View {
 }
 
 #Preview {
-    @Previewable @State var minimalQuantity: Int = 1
-    QuantityView(
-        quantity: 1,
-        minimalQuantity: $minimalQuantity
-    )
+    @Previewable @State var minimalQuantity = 1
+    QuantityView(quantity: 1, minimalQuantity: $minimalQuantity)
 }

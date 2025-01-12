@@ -11,16 +11,7 @@ final class StorageItemViewModel: ObservableObject {
     @Published var name: String
     @Published var quantity: Int
     @Published var group: StorageGroup
-    @Published var hasMinimalAmount: Bool
-
-    @Published var minimalQuantity: Int {
-        didSet {
-            if minimalQuantity == 0 {
-                hasMinimalAmount = false
-                minimalQuantity = StorageItem.defaultMinimalQuantity
-            }
-        }
-    }
+    @Published var minimalQuantity: Int
 
     var item: StorageItem {
         StorageItem(
@@ -36,7 +27,6 @@ final class StorageItemViewModel: ObservableObject {
         quantity = item.quantity
         minimalQuantity = item.minimalQuantity
         group = item.group
-        hasMinimalAmount = item.minimalQuantity > StorageItem.defaultMinimalQuantity
     }
     
     convenience init() {

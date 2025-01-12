@@ -8,15 +8,19 @@
 import SwiftUI
 
 struct QuantityButtonStyle: ButtonStyle {
+    @Environment(\.isEnabled) private var isEnabled: Bool
+
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .frame(width: 20, height: 20)
             .padding(10)
             .fontWeight(.bold)
             .foregroundStyle(
-                configuration.isPressed
-                ? Color.purple.opacity(0.3)
-                : Color.purple
+                isEnabled
+                    ? (configuration.isPressed
+                        ? Color.purple.opacity(0.3)
+                        : Color.purple)
+                    : Color.gray
             )
             .animation(
                 configuration.isPressed

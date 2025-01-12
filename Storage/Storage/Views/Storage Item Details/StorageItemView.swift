@@ -13,35 +13,30 @@ struct StorageItemView: View {
     var body: some View {
         VStack(spacing: 20) {
             propertiesView
-            itemCounterView
-            minimalAmountView
             Spacer()
+            quantityProgressView
+            itemCounterView
         }
     }
-    
+
     @ViewBuilder private var propertiesView: some View {
         HStack {
             TextField("Name", text: $viewModel.name)
             StorageGroupButton(group: $viewModel.group)
         }
     }
-    
-    @ViewBuilder private var itemCounterView: some View {
-        ItemCounter(quantity: $viewModel.quantity)
+
+    @ViewBuilder private var quantityProgressView: some View {
+        QuantityView(
+            quantity: viewModel.quantity,
+            minimalQuantity: $viewModel.minimalQuantity
+        )
     }
-    
-    @ViewBuilder private var minimalAmountView: some View {
-        if viewModel.hasMinimalAmount {
-            QuantityView(
-                quantity: viewModel.quantity,
-                minimalQuantity: $viewModel.minimalQuantity
-            )
-        } else {
-            Button {
-                viewModel.hasMinimalAmount = true
-            } label: {
-                Text("Set minimal amount")
-            }
+
+    @ViewBuilder private var itemCounterView: some View {
+        ItemCounter(quantity: $viewModel.quantity) {
+            Text("\(viewModel.quantity)")
+                .font(.largeTitle)
         }
     }
 }

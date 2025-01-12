@@ -20,7 +20,7 @@ struct QuantityBar: View {
                     .frame(width: geometry.size.width * fraction.normalized)
             }
         }
-        .frame(height: 30)
+        .frame(height: 50)
         .cornerRadius(10)
     }
 }
