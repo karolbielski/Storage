@@ -9,15 +9,27 @@ import SwiftUI
 
 struct QuantityBar: View {
     let fraction: CGFloat
-    
+
+    private var normalizedFraction: CGFloat {
+        max(0, min(1, fraction))
+    }
+
+    private var color: Color {
+        if normalizedFraction == 1.0 {
+            .green
+        } else {
+            .purple
+        }
+    }
+
     var body: some View {
         GeometryReader { geometry in
             ZStack(alignment: .leading) {
                 Rectangle()
                     .fill(Color.secondary.opacity(0.5))
                 Rectangle()
-                    .fill(Color.purple.opacity(0.5))
-                    .frame(width: geometry.size.width * fraction.normalized)
+                    .fill(color.opacity(0.5))
+                    .frame(width: geometry.size.width * normalizedFraction)
             }
         }
         .frame(height: 50)
@@ -25,18 +37,18 @@ struct QuantityBar: View {
     }
 }
 
-#Preview {
+#Preview("0.4") {
     QuantityBar(fraction: 0.4)
 }
 
-private extension CGFloat {
-    var normalized: CGFloat {
-        return if self > 1 {
-            1
-        } else if self < 0 {
-            0
-        } else {
-            self
-        }
-    }
+#Preview("1.0") {
+    QuantityBar(fraction: 1.0)
+}
+
+#Preview("-0.4") {
+    QuantityBar(fraction: -0.4)
+}
+
+#Preview("4.0") {
+    QuantityBar(fraction: 4.0)
 }
