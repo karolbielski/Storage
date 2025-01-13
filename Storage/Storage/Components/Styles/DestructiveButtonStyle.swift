@@ -15,11 +15,9 @@ struct DestructiveButtonStyle: ButtonStyle {
             .fontWeight(.bold)
             .foregroundStyle(
                 configuration.isPressed
-                    ? Color.white.opacity(0.3)
-                    : Color.white
+                    ? Color.red.opacity(0.3)
+                    : Color.red
             )
-            .background(Color.red)
-            .cornerRadius(10)
             .animation(
                 configuration.isPressed
                     ? .easeInOut(duration: 0.05)

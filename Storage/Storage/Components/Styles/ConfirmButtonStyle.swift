@@ -15,11 +15,9 @@ struct ConfirmButtonStyle: ButtonStyle {
             .fontWeight(.bold)
             .foregroundStyle(
                 configuration.isPressed
-                    ? Color.white.opacity(0.3)
-                    : Color.white
+                    ? Color.purple.opacity(0.3)
+                    : Color.purple
             )
-            .background(Color.purple)
-            .cornerRadius(10)
             .animation(
                 configuration.isPressed
                     ? .easeInOut(duration: 0.05)

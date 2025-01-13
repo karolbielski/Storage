@@ -38,41 +38,61 @@ struct ContentView: View {
             }
         }
         .sheet(item: $selectedItem) { item in
-            let viewModel = StorageItemViewModel(item: item)
-            VStack(spacing: 20) {
-                StorageItemView(viewModel: viewModel)
-                HStack(spacing: 20) {
-                    Button("Remove") {
-                        if let index = items.firstIndex(of: item) {
-                            items.remove(at: index)
-                        }
-                        selectedItem = nil
-                    }
-                    .buttonStyle(DestructiveButtonStyle())
-                    Button("Save") {
-                        if let index = items.firstIndex(of: item) {
-                            items[index] = viewModel.item
-                        }
-                        selectedItem = nil
-                    }
-                    .buttonStyle(ConfirmButtonStyle())
-                }
-            }
-            .padding(20)
-            .presentationDetents([.fraction(0.4)])
+            editItemView(item)
+                .presentationDetents([.medium])
         }
         .sheet(isPresented: $isNewItemViewPresented) {
-            let viewModel = StorageItemViewModel()
-            VStack(spacing: 20) {
-                StorageItemView(viewModel: viewModel)
-                Button("Create") {
-                    items.append(viewModel.item)
-                    isNewItemViewPresented = false
+            newItemView()
+                .presentationDetents([.medium])
+        }
+    }
+
+    @ViewBuilder private func editItemView(_ item: StorageItem) -> some View {
+        let viewModel = StorageItemViewModel(item: item)
+        NavigationStack {
+            StorageItemView(viewModel: viewModel)
+                .padding(20)
+                .navigationTitle("Edit \(item.name)")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .topBarLeading) {
+                        Button("Remove") {
+                            if let index = items.firstIndex(of: item) {
+                                items.remove(at: index)
+                            }
+                            selectedItem = nil
+                        }
+                        .buttonStyle(DestructiveButtonStyle())
+                    }
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button("Save") {
+                            if let index = items.firstIndex(of: item) {
+                                items[index] = viewModel.item
+                            }
+                            selectedItem = nil
+                        }
+                        .buttonStyle(ConfirmButtonStyle())
+                    }
                 }
-                .buttonStyle(ConfirmButtonStyle())
-            }
-            .padding(20)
-            .presentationDetents([.fraction(0.4)])
+        }
+    }
+
+    @ViewBuilder private func newItemView() -> some View {
+        let viewModel = StorageItemViewModel()
+        NavigationStack {
+            StorageItemView(viewModel: viewModel)
+                .padding(20)
+                .navigationTitle("New item")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .primaryAction) {
+                        Button("Create") {
+                            items.append(viewModel.item)
+                            isNewItemViewPresented = false
+                        }
+                        .buttonStyle(ConfirmButtonStyle())
+                    }
+                }
         }
     }
 }
